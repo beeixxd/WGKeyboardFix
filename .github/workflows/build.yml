@@ -1,4 +1,4 @@
-name: Build WGKeyboardFix dylib
+name: Build WGEKeyboardFix dylib
 
 on:
   workflow_dispatch:
@@ -22,19 +22,19 @@ jobs:
           clang -dynamiclib -arch arm64 -miphoneos-version-min=13.0 \
             -isysroot "$SDK" \
             -framework UIKit -framework Foundation \
-            -o WGKeyboardFix.dylib WGKeyboardFix.m
-          codesign -s - WGKeyboardFix.dylib
-          file WGKeyboardFix.dylib
+            -o WGEKeyboardFix.dylib WGEKeyboardFix.m
+          codesign -s - WGEKeyboardFix.dylib
+          file WGEKeyboardFix.dylib
 
       - uses: actions/upload-artifact@v4
         with:
-          name: WGKeyboardFix-dylib
-          path: WGKeyboardFix.dylib
+          name: WGEKeyboardFix-dylib
+          path: WGEKeyboardFix.dylib
 
       - uses: softprops/action-gh-release@v2
         with:
           tag_name: build-${{ github.run_number }}
-          name: WGKeyboardFix build ${{ github.run_number }}
-          files: WGKeyboardFix.dylib
+          name: WGEKeyboardFix build ${{ github.run_number }}
+          files: WGEKeyboardFix.dylib
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
